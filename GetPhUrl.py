@@ -24,7 +24,7 @@ col1=db['ph_url']
 
 
 def url_save_mongo(ph_url):
-    detail1={'ph_url':ph_url,'时间':date}
+    detail1={'ph_url':str(ph_url),'时间':date}
     print("正在插入"+detail1)
     col1.insert(detail1)
 
@@ -41,8 +41,8 @@ def get_ph_url(response):
                 url_save_mongo(ph_url)
             except Exception as e:
                 print(e)
-    except:
-        print("selector error")
+    except Exception as e:
+        print(e)
 
 def start_url():
     try:
@@ -53,8 +53,8 @@ def start_url():
     try:
         response = response.read().decode('utf-8')
         get_ph_url(response)
-    except:
-        print("response.decode error")
+    except Exception as e:
+        print(e)
 
 
 if __name__=='__main__':
