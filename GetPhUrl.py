@@ -1,18 +1,11 @@
 import urllib.request
 from urllib import request
-import sys
-import os
-import io
 import ssl
-import re
 from scrapy.selector import Selector
 from scrapy.http import HtmlResponse
-from  bs4 import BeautifulSoup
-# import threading
 import pymongo
 import time
 import random
-import requests
 
 url = 'https://jp.pornhub.com'
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -31,63 +24,8 @@ col2=db['ph_url']
 #2.存取mongo数据
 
 
-def ph_url_mongo(title,ph_url):
+def url_save_mongo(title,ph_url):
 	pass
-
-def callbackfunc(blocknum, blocksize, totalsize):
-    '''回调函数
-    @blocknum: 已经下载的数据块
-    @blocksize: 数据块的大小
-    @totalsize: 远程文件的大小
-    '''
-    global url
-    percent = 100.0 * blocknum * blocksize / totalsize
-    if percent > 100:
-        percent = 100
-    downsize=blocknum * blocksize
-    if downsize >= totalsize:
-       downsize=totalsize
-    s ="%.2f%%"%(percent)+"====>"+"%.2f"%(downsize/1024/1024)+"M/"+"%.2f"%(totalsize/1024/1024)+"M \r"
-    sys.stdout.write(s)
-    sys.stdout.flush()
-    if percent == 100:
-        print('')
-        input('输入任意键继续...')
-
-
-def down_file(downurl,title):
-    title=title+'.mp4'
-    filename=os.path.basename(title)
-    request.urlretrieve(downurl, filename, callbackfunc)
-
-
-def get_down_url():
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    try:
-        r = request.Request(url)
-    except request.RequestException as e:
-        print("网页失败请求！1")
-    response=request.urlopen(r)
-    try:
-        html=response.read().decode('utf-8')
-    except:
-        pass
-    rtitle=re.findall(r'<title>.*?</title>',html)
-    rdownurl=re.findall(r'videoUrl.*?}',html)
-    print("\n")
-    rtitle=str(rtitle)
-    title=re.sub('<.*?title>','',rtitle)
-    title=re.sub('\[','',title)
-    title=re.sub(']','',title)
-    print(title)
-    print("\n")
-    for i in range(1):
-        downurl = rdownurl[i].split('"')[2]
-        downurl = re.sub('\\\\','',downurl)
-        print(downurl)
-    down_file(downurl,title)
-
-
 
 
 def get_ph_url(response):
@@ -98,12 +36,8 @@ def get_ph_url(response):
         for div in divs:
            viewurl = url + div
            print("viewurl:" + viewurl)
-
-        # 将数据存入mongodb中,待完成
     except:
         pass
-
-
 
 def start_url():
     try:
@@ -116,14 +50,7 @@ def start_url():
         get_ph_url(response)
     except:
         pass
-    # html=requests.get(url,headers=header).conten.decode('utf-8')
-    # print(html)
-    # response=BeautifulSoup(html,'lxml')
 
 
 if __name__=='__main__':
     start_url()
-
-    # getporhub()
-    # 启动线程下载
-    # threading.Thread(target=downimg,args=('')).start()

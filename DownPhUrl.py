@@ -5,8 +5,6 @@ import os
 import io
 import ssl
 import re
-from scrapy.selector import Selector
-from scrapy.http import HtmlResponse
 from  bs4 import BeautifulSoup
 # import threading
 import pymongo
@@ -31,7 +29,7 @@ col2=db['ph_url']
 #2.存取mongo数据
 
 
-def ph_url_mongo(title,ph_url):
+def Get_url_mongo(title,ph_url):
 	pass
 
 def callbackfunc(blocknum, blocksize, totalsize):
@@ -58,6 +56,7 @@ def callbackfunc(blocknum, blocksize, totalsize):
 def down_file(downurl,title):
     title=title+'.mp4'
     filename=os.path.basename(title)
+    print("开始下载文件%s\n")%title
     request.urlretrieve(downurl, filename, callbackfunc)
 
 
@@ -74,56 +73,21 @@ def get_down_url():
         pass
     rtitle=re.findall(r'<title>.*?</title>',html)
     rdownurl=re.findall(r'videoUrl.*?}',html)
-    print("\n")
     rtitle=str(rtitle)
     title=re.sub('<.*?title>','',rtitle)
     title=re.sub('\[','',title)
     title=re.sub(']','',title)
-    print(title)
-    print("\n")
     for i in range(1):
         downurl = rdownurl[i].split('"')[2]
         downurl = re.sub('\\\\','',downurl)
-        print(downurl)
     down_file(downurl,title)
 
 
 
 
-def get_ph_url(response):
-    #这一段经常出问题 尝试3次
-    try:
-        selector = Selector(text=response)
-        divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
-        for div in divs:
-           viewurl = url + div
-           print("viewurl:" + viewurl)
-
-        # 将数据存入mongodb中,待完成
-    except:
-        pass
-
-
-
-def start_url():
-    try:
-        r = request.Request(url=url)
-    except request.RequestException as e:
-        print("网页请求失败! 2")
-    response = request.urlopen(r)
-    try:
-        response = response.read().decode('utf-8')
-        get_ph_url(response)
-    except:
-        pass
-    # html=requests.get(url,headers=header).conten.decode('utf-8')
-    # print(html)
-    # response=BeautifulSoup(html,'lxml')
 
 
 if __name__=='__main__':
-    start_url()
-
-    # getporhub()
+    # get_down_url()
     # 启动线程下载
     # threading.Thread(target=downimg,args=('')).start()
