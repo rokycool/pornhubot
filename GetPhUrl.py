@@ -24,7 +24,8 @@ col1=db['ph_url']
 
 
 def url_save_mongo(ph_url):
-    detail1={'ph_url':str(ph_url),'时间':date}
+    print("a")
+    detail1={'ph_url':ph_url,'时间':date}
     print("正在插入"+detail1)
     col1.insert(detail1)
 
@@ -36,7 +37,7 @@ def get_ph_url(response):
         divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
         for div in divs:
             ph_url = url + div
-            print("viewurl:" + ph_url)
+            # print("viewurl:" + ph_url)
             try:
                 url_save_mongo(ph_url)
             except Exception as e:
