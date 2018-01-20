@@ -25,6 +25,7 @@ col1=db['ph_url']
 
 def url_save_mongo(ph_url):
     detail1={'ph_url':ph_url,'时间':date}
+    print("正在插入%smongo")%detail1
     col1.insert(detail1)
 
 
@@ -35,7 +36,7 @@ def get_ph_url(response):
         divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
         for div in divs:
             viewurl = url + div
-           # print("viewurl:" + viewurl)
+            print("viewurl:" + viewurl)
             url_save_mongo(viewurl)
     except:
         pass
