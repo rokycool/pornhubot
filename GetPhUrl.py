@@ -37,9 +37,12 @@ def get_ph_url(response):
         for div in divs:
             ph_url = url + div
             print("viewurl:" + ph_url)
-            url_save_mongo(ph_url)
+            try:
+                url_save_mongo(ph_url)
+            except:
+                print("url_save_mongo error")
     except:
-        print("selector")
+        print("selector error")
 
 def start_url():
     try:
@@ -51,7 +54,7 @@ def start_url():
         response = response.read().decode('utf-8')
         get_ph_url(response)
     except:
-        print("response.decode")
+        print("response.decode error")
 
 
 if __name__=='__main__':
