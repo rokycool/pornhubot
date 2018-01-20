@@ -39,7 +39,7 @@ def get_ph_url(response):
             print("viewurl:" + ph_url)
             url_save_mongo(ph_url)
     except:
-        pass
+        print("selector")
 
 def start_url():
     try:
@@ -51,7 +51,7 @@ def start_url():
         response = response.read().decode('utf-8')
         get_ph_url(response)
     except:
-        pass
+        print("response.decode")
 
 
 if __name__=='__main__':
