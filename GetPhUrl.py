@@ -39,8 +39,8 @@ def get_ph_url(response):
             print("viewurl:" + ph_url)
             try:
                 url_save_mongo(ph_url)
-            except:
-                print("url_save_mongo error")
+            except Exception as e:
+                print(e)
     except:
         print("selector error")
 
