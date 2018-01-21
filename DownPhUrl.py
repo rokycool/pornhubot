@@ -92,6 +92,7 @@ def get_down_url(url):
         response=response.read().decode('utf-8')
     except:
         print("exit code:4")
+    print("response:",response)
     rtitle=re.findall(r'<title>.*?</title>',response)
     rdownurl=re.findall(r'videoUrl.*?}',response)
     rtitle=str(rtitle)
