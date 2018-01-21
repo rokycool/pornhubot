@@ -32,10 +32,7 @@ def url_save_mongo(ph_url):
     except Exception as e:
         print(e)
 def parse_url__from_mongo():
-    if col1.find_one() == None:
-        print("mongo为空")
-    else:
-        print("mongo不为空")
+    print(col1.find_one())
     for item in col1.find('ph_url'):
         print(item)
 
@@ -71,5 +68,5 @@ def start_url():
 
 
 if __name__=='__main__':
-    # start_url()
-    parse_url__from_mongo()
+    start_url()
+    # parse_url__from_mongo()
