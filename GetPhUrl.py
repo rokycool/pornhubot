@@ -32,7 +32,11 @@ def url_save_mongo(ph_url):
     except Exception as e:
         print(e)
 def parse_url__from_mongo():
-    for item in col1.find():
+    if col1.find_one():
+        print("mongo为空")
+    else:
+        print("mongo不为空")
+    for item in col1.find('ph_url'):
         print(item)
 
 
@@ -46,6 +50,8 @@ def get_ph_url(response):
             ph_url = str(ph_url)
             try:
                 url_save_mongo(ph_url)
+            except pymongo.errors.DuplicateKeyError:
+                print("重复的url")
             except Exception as e:
                 print(e)
     except Exception as e:
