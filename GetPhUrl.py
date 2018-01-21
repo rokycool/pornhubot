@@ -25,7 +25,7 @@ col1=db['ph_url']
 
 def url_save_mongo(ph_url):
     detail1={'ph_url': ph_url, '时间': date}
-    print("ph_url:"+ph_url)
+    print("ph_url:",detail1['ph_url'])
     print("正在插入"+detail1)
     col1.insert(detail1)
 def get_ph_url(response):
