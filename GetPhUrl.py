@@ -6,7 +6,6 @@ from scrapy.http import HtmlResponse
 import pymongo
 import time
 import json
-import random
 
 pornhub_url='https://jp.pornhub.com'
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -66,7 +65,7 @@ def start_url(url):
         print(e)
 
 def parse_url__from_mongo():
-    for i in random(max_while):
+    for i in range(max_while):
         for item in col1.find('ph_url'):
             if not item or item.count() == 0:
                 pornhub_url = 'https://jp.pornhub.com'
