@@ -26,6 +26,8 @@ col2.ensure_index('title', unique=True)
 num=0
 renum=0
 gonum=0
+sunum=0
+
 #最大下载进程
 max_thread=2
 #待完善功能
@@ -67,15 +69,17 @@ def callbackfunc(blocknum, blocksize, totalsize):
 
 
 def down_file(downurl,title):
+    global sunum
     title=title+'.mp4'
     filename=os.path.basename(title+".mp4")
     print("开始下载文件",title)
-    Save_url_mongo(title,downurl)
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
     except:
         print("exit code: 5 无法下载该文件:",title,"\ndownurl:")
-
+    sunum +=1
+    print("下载成功 开始记录到数据库",sunum)
+    Save_url_mongo(title,downurl)
 
 
 def get_down_url(url):
