@@ -32,7 +32,7 @@ def url_save_mongo(ph_url):
     except Exception as e:
         print(e)
 def parse_url__from_mongo():
-    if col1.find_one():
+    if col1.find_one() == None:
         print("mongo为空")
     else:
         print("mongo不为空")
