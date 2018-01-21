@@ -75,6 +75,7 @@ def parse_url__from_mongo():
         url_save_mongo(_item)
     while (True):
         for item in col1.find('ph_url'):
+            print("正在解析:",item)
             start_url(item)
 
 if __name__=='__main__':
