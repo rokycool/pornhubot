@@ -29,16 +29,18 @@ col1.ensure_index('ph_url', unique=True)
 #2.存取mongo数据
 #最大抓取深度
 max_while=6
-
+num=0
+renum=0
 def url_save_mongo(ph_url):
+    global renum
     detail1={'时间':date,'ph_url':ph_url}
     print("正在插入",detail1['ph_url'])
     try:
         col1.insert(detail1)
         print("插入成功",detail1['ph_url'])
     except:
-        pass
-
+        renum += 1
+        print("重复url:",renum)
 
 def get_ph_url(response):
     #这一段经常出问题 尝试3次
@@ -70,11 +72,13 @@ def start_url(url):
         print("exit code 6")
 
 def parse_url__from_mongo():
+    global num
     for i in pornhub_url:
         url_save_mongo(i)
     while (True):
         for item in col1.find():
-            print("正在解析:",item['ph_url'])
+            num +=1
+            print("正在解析:",num,item['ph_url'])
             start_url(item['ph_url'])
 
 if __name__=='__main__':
