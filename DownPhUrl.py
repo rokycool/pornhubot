@@ -105,7 +105,7 @@ def get_down_url(url):
     for i in range(1):
         downurl = rdownurl[i].split('"')[2]
         downurl = re.sub('\\\\','',downurl)
-    print("title:",title,"downrul:",downurl)
+    print("title:",title,"downrul:",downurl,"url:",url)
     down_file(downurl,title)
 
 if __name__=='__main__':
