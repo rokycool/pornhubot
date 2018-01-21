@@ -32,13 +32,6 @@ max_thread=2
 #1.更换header
 
 
-def Get_url_mongo():
-    global num
-    for item in col1.find():
-        num +=1
-        print("open url :",num,item['ph_url'])
-        get_down_url(item['ph_url'])
-
 
 
 def Save_url_mongo(title,downurl):
@@ -107,10 +100,19 @@ def get_down_url(url):
         downurl = re.sub('\\\\','',downurl)
     down_file(downurl,title)
 
+def Get_url_mongo():
+    global num
+    for item in col1.find():
+        num +=1
+        print("open url :",num,item['ph_url'])
+        get_down_url(item['ph_url'])
+
+
 if __name__=='__main__':
     # url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
-    # get_down_url(url)
-    Get_url_mongo()
+    url='https://jp.pornhub.com/view_video.php?viewkey=ph57dfb291d5af9'
+    get_down_url(url)
+    # Get_url_mongo()
     # 启动线程下载
     # for i in range(max_thread):
     #     threading.Thread(target=Get_url_mongo,args=('')).start()
