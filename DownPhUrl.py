@@ -93,11 +93,11 @@ def get_down_url(url):
         print("网页失败请求！1")
     response=request.urlopen(r)
     try:
-        html=response.read().decode('utf-8')
+        response=response.read().decode('utf-8')
     except:
         print("exit code:4")
-    rtitle=re.findall(r'<title>.*?</title>',html)
-    rdownurl=re.findall(r'videoUrl.*?}',html)
+    rtitle=re.findall(r'<title>.*?</title>',response)
+    rdownurl=re.findall(r'videoUrl.*?}',response)
     rtitle=str(rtitle)
     title=re.sub('<.*?title>','',rtitle)
     title=re.sub('\[','',title)
@@ -106,7 +106,7 @@ def get_down_url(url):
         downurl = rdownurl[i].split('"')[2]
         downurl = re.sub('\\\\','',downurl)
     print("title:",title,"downrul:",downurl,"url:",url)
-    down_file(downurl,title)
+    # down_file(downurl,title)
 
 if __name__=='__main__':
     url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
