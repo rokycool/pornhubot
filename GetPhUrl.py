@@ -31,13 +31,16 @@ col1.ensure_index('ph_url', unique=True)
 max_while=6
 num=0
 renum=0
+gonum=0
 def url_save_mongo(ph_url):
+    global gonum
     global renum
     detail1={'时间':date,'ph_url':ph_url}
     print("正在插入",detail1['ph_url'])
     try:
         col1.insert(detail1)
-        print("插入成功",detail1['ph_url'])
+        print("插入成功",gonum,detail1['ph_url'])
+        gonum += 1
     except:
         renum += 1
         print("重复url:",renum)
