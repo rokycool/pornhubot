@@ -71,13 +71,12 @@ def callbackfunc(blocknum, blocksize, totalsize):
     sys.stdout.flush()
     if percent == 100:
         print('')
-        input('输入任意键继续...')
 
 
 def down_file(downurl,title):
     title=title+'.mp4'
-    filename=os.path.basename(title)
-    print("开始下载文件%s\n")%title
+    filename=os.path.basename(title+".mp4")
+    print("开始下载文件%",title)
     Save_url_mongo(title,downurl)
     request.urlretrieve(downurl, filename, callbackfunc)
 
