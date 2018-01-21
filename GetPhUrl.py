@@ -25,9 +25,12 @@ col1=db['ph_url']
 
 def url_save_mongo(ph_url):
     detail1={'ph_url': ph_url, '时间': date}
-    print("ph_url:",detail1['ph_url'])
     print("正在插入",detail1['ph_url'])
-    col1.insert(detail1)
+    try:
+        col1.insert(detail1)
+        print("插入成功",detail1['ph_url'])
+    except Exception as e:
+        print(e)
 def get_ph_url(response):
     #这一段经常出问题 尝试3次
     try:
