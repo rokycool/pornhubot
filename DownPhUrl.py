@@ -70,14 +70,11 @@ def down_file(downurl,title):
     title=title+'.mp4'
     filename=os.path.basename(title+".mp4")
     print("开始下载文件",title)
-    if downurl==None:
-        print("exit code:3")
-        exit()
     Save_url_mongo(title,downurl)
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
     except:
-        print("exit code: 5无法下载该文件:",title,"downurl:")
+        print("exit code: 5 无法下载该文件:",title,"downurl:")
 
 
 
@@ -105,7 +102,7 @@ def get_down_url(url):
     if downurl ==None:
         downurl = rdownurl[2].split('"')[2]
     downurl = re.sub('\\\\','',downurl)
-    print("get_down_url函数中 downurl:",downurl)
+    # print("get_down_url函数中 downurl:",downurl)
     down_file(downurl,title)
 
 def Get_url_mongo():
@@ -118,9 +115,9 @@ def Get_url_mongo():
 
 if __name__=='__main__':
     # url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
-    url='https://jp.pornhub.com/view_video.php?viewkey=ph57dfb291d5af9'
-    get_down_url(url)
-    # Get_url_mongo()
+    # url='https://jp.pornhub.com/view_video.php?viewkey=ph57dfb291d5af9'
+    # get_down_url(url)
+    Get_url_mongo()
     # 启动线程下载
     # for i in range(max_thread):
     #     threading.Thread(target=Get_url_mongo,args=('')).start()
