@@ -77,6 +77,9 @@ def down_file(downurl,title):
     title=title+'.mp4'
     filename=os.path.basename(title+".mp4")
     print("开始下载文件",title,"url:",downurl)
+    if downurl==None:
+        print("exit code:3")
+        exit()
     Save_url_mongo(title,downurl)
     request.urlretrieve(downurl, filename, callbackfunc)
 
@@ -92,7 +95,7 @@ def get_down_url(url):
     try:
         html=response.read().decode('utf-8')
     except:
-        pass
+        print("exit code:4")
     rtitle=re.findall(r'<title>.*?</title>',html)
     rdownurl=re.findall(r'videoUrl.*?}',html)
     rtitle=str(rtitle)
@@ -102,9 +105,11 @@ def get_down_url(url):
     for i in range(1):
         downurl = rdownurl[i].split('"')[2]
         downurl = re.sub('\\\\','',downurl)
+    print("title:",title,"downrul:",downurl)
     down_file(downurl,title)
 
 if __name__=='__main__':
+    Get_url_mongo()
     # 启动线程下载
-    for i in range(max_thread):
-        threading.Thread(target=Get_url_mongo,args=('')).start()
+    # for i in range(max_thread):
+    #     threading.Thread(target=Get_url_mongo,args=('')).start()
