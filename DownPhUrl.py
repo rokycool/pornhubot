@@ -110,7 +110,7 @@ def get_down_url(url):
 if __name__=='__main__':
     # url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
     # get_down_url(url)
-    # Get_url_mongo()
+    Get_url_mongo()
     # 启动线程下载
-    for i in range(max_thread):
-        threading.Thread(target=Get_url_mongo,args=('')).start()
+    # for i in range(max_thread):
+    #     threading.Thread(target=Get_url_mongo,args=('')).start()
