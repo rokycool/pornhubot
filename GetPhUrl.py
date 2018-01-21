@@ -24,6 +24,7 @@ col1=db['ph_url']
 
 
 def url_save_mongo(ph_url):
+    detail1={}
     print("ph_url:"+ph_url)
     detail1={'ph_url':'https://jp.pornhub.com/view_video.php?viewkey=ph59c67c843d568','时间':date}
     print("正在插入"+detail1)
