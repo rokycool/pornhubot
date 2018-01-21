@@ -31,7 +31,7 @@ col1.ensure_index('ph_url', unique=True)
 max_while=6
 
 def url_save_mongo(ph_url):
-    detail1={ '时间': date, 'ph_url': ph_url}
+    detail1={'时间':date,'ph_url':ph_url}
     print("正在插入",detail1['ph_url'])
     try:
         col1.insert(detail1)
@@ -71,12 +71,12 @@ def start_url(url):
         print(e)
 
 def parse_url__from_mongo():
-    for _item in pornhub_url:
-        url_save_mongo(_item)
+    for i in pornhub_url:
+        url_save_mongo(i)
     while (True):
         for item in col1.find():
-            print("正在解析:",str(item['ph_url']))
-            start_url(item)
+            print("正在解析:",item['ph_url'])
+            start_url(item['ph_url'])
 
 if __name__=='__main__':
     # start_url()
