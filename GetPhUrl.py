@@ -8,7 +8,7 @@ import time
 import json
 import random
 
-url = 'https://jp.pornhub.com'
+pornhub_url='https://jp.pornhub.com'
 ssl._create_default_https_context = ssl._create_unverified_context
 
 UA_LIST = [ "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24" ]
@@ -22,7 +22,8 @@ col1.ensure_index('ph_url', unique=True)
 #待完善功能
 #1.更换header
 #2.存取mongo数据
-
+#最大抓取深度
+max_while=6
 
 def url_save_mongo(ph_url):
     detail1={ '时间': date, 'ph_url': ph_url}
@@ -32,12 +33,7 @@ def url_save_mongo(ph_url):
         print("插入成功",detail1['ph_url'])
     except Exception as e:
         print(e)
-def parse_url__from_mongo():
-    onedata=col1.find_one('ph_url')
-    onedata=json.load(onedata)
-    print(onedata)
-    for item in col1.find('ph_url'):
-        print(item)
+
 
 
 def get_ph_url(response):
@@ -46,7 +42,7 @@ def get_ph_url(response):
         selector = Selector(text=response)
         divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
         for div in divs:
-            ph_url = url + div
+            ph_url = pornhub_url + div
             ph_url = str(ph_url)
             try:
                 url_save_mongo(ph_url)
@@ -57,7 +53,7 @@ def get_ph_url(response):
     except Exception as e:
         print(e)
 
-def start_url():
+def start_url(url):
     try:
         r = request.Request(url=url)
     except request.RequestException as e:
@@ -69,7 +65,15 @@ def start_url():
     except Exception as e:
         print(e)
 
-
+def parse_url__from_mongo():
+    ret = col1.find('ph_url')
+    for i in random(max_while):
+        if not ret or ret.count() == 0:
+            pornhub_url = 'https://jp.pornhub.com'
+            start_url(pornhub_url)
+        else:
+            for item in ret:
+                start_url(item)
 if __name__=='__main__':
     # start_url()
     parse_url__from_mongo()
