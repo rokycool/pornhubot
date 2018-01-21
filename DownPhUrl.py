@@ -77,7 +77,7 @@ def down_file(downurl,title):
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
     except:
-        print("not download file:",title,"downurl:")
+        print("无法下载该文件:",title,"downurl:")
 
 
 
