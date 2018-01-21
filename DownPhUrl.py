@@ -6,37 +6,41 @@ import io
 import ssl
 import re
 from  bs4 import BeautifulSoup
-# import threading
+import threading
 import pymongo
 import time
 import random
 import requests
 
-url = 'https://jp.pornhub.com'
 ssl._create_default_https_context = ssl._create_unverified_context
 
 UA_LIST = [ "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3", "Mozilla/5.0 (Windows NT 5.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_0) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1063.0 Safari/536.3", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1062.0 Safari/536.3", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3", "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.1 Safari/536.3", "Mozilla/5.0 (Windows NT 6.2) AppleWebKit/536.3 (KHTML, like Gecko) Chrome/19.0.1061.0 Safari/536.3", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24", "Mozilla/5.0 (Windows NT 6.2; WOW64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24" ]
 header={ 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 'Accept-Encoding': 'gzip, deflate, sdch', 'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6', 'Connection': 'keep-alive','User-Agent': random.choice(UA_LIST) }
 clients=pymongo.MongoClient('106.15.224.237')
 date=time.strftime("%F-%T", time.localtime())
-dbname="down_url"
+dbname="pornhub"
 db=clients[dbname]
 col1=db['detail']
-
+col2=db['downurl']
+num=0
 
 #待完善功能
 #1.更换header
 #2.存取mongo数据
 
 
-def Get_url_mongo(ph_url):
+def Get_url_mongo():
+    global num
+    for item in col1.find():
+        num +=1
+        print("open url :",num,item['ph_url'])
+        get_down_url(item['ph_url'])
 
-	pass
 
 
-def save_downurl_mongo(title,downurl):
-    detail1 = {'标题': title, '下载URL':downurl,'时间':date}
-    col1.insert(detail1)
+def Save_url_mongo(title,downurl):
+    detail1 = {'时间':date,'标题': title, '下载URL':downurl}
+    col2.insert(detail1)
 
 def callbackfunc(blocknum, blocksize, totalsize):
     '''回调函数
@@ -64,9 +68,10 @@ def down_file(downurl,title):
     filename=os.path.basename(title)
     print("开始下载文件%s\n")%title
     request.urlretrieve(downurl, filename, callbackfunc)
+    Save_url_mongo(title,downurl)
 
 
-def get_down_url():
+def get_down_url(url):
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     try:
         r = request.Request(url)
@@ -94,6 +99,7 @@ def get_down_url():
 
 
 if __name__=='__main__':
+    # Get_url_mongo()
     # get_down_url()
     # 启动线程下载
-    # threading.Thread(target=downimg,args=('')).start()
+    threading.Thread(target=Get_url_mongo,args=('')).start()
