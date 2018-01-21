@@ -91,23 +91,24 @@ def get_down_url(url):
     response=request.urlopen(r)
     try:
         response=response.read().decode('utf-8')
+        # print("response:",response)
+        rtitle = re.findall(r'<title>.*?</title>', response)
+        rdownurl = re.findall(r'videoUrl.*?}', response)
+        # print("rdownurl:",rdownurl,"rtitle",rtitle)
+        rtitle = str(rtitle)
+        title = re.sub('<.*?title>', '', rtitle)
+        title = re.sub('\[', '', title)
+        title = re.sub(']', '', title)
+        # for i in range(1):
+        downurl = rdownurl[1].split('"')[2]
+        if downurl == None:
+            downurl = rdownurl[2].split('"')[2]
+        downurl = re.sub('\\\\', '', downurl)
+        # print("get_down_url函数中 downurl:",downurl)
+        down_file(downurl, title)
     except:
         print("exit code:4")
-    # print("response:",response)
-    rtitle=re.findall(r'<title>.*?</title>',response)
-    rdownurl=re.findall(r'videoUrl.*?}',response)
-    # print("rdownurl:",rdownurl,"rtitle",rtitle)
-    rtitle=str(rtitle)
-    title=re.sub('<.*?title>','',rtitle)
-    title=re.sub('\[','',title)
-    title=re.sub(']','',title)
-    # for i in range(1):
-    downurl = rdownurl[1].split('"')[2]
-    if downurl ==None:
-        downurl = rdownurl[2].split('"')[2]
-    downurl = re.sub('\\\\','',downurl)
-    # print("get_down_url函数中 downurl:",downurl)
-    down_file(downurl,title)
+
 
 def Get_url_mongo():
     global num
