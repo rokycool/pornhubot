@@ -17,7 +17,7 @@ date=time.strftime("%F", time.localtime())
 dbname="pornhub"+date
 db=clients[dbname]
 col1=db['detail']
-
+col1.ensure_index('ph_url', unique=True)
 #待完善功能
 #1.更换header
 #2.存取mongo数据
