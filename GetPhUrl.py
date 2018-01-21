@@ -74,8 +74,8 @@ def parse_url__from_mongo():
     for _item in pornhub_url:
         url_save_mongo(_item)
     while (True):
-        for item in col1.find('ph_url'):
-            print("正在解析:",item)
+        for item in col1.find():
+            print("正在解析:",item['ph_url'])
             start_url(item)
 
 if __name__=='__main__':
