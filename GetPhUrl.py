@@ -24,7 +24,7 @@ col1=db['ph_url']
 
 
 def url_save_mongo(ph_url):
-    detail1={'ph_url':ph_url}
+    detail1={'ph_url':str(ph_url)}
     print("ph_url:"+ph_url)
     print("正在插入"+detail1)
     col1.insert(detail1)
