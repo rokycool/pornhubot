@@ -72,7 +72,7 @@ def start_url(url):
 
 def parse_url__from_mongo():
     for i in pornhub_url:
-        start_url(i)
+        start_url(str(i))
     while (True):
         for item in col1.find('ph_url'):
             start_url(item)
