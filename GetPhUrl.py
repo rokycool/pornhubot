@@ -37,8 +37,7 @@ def url_save_mongo(ph_url):
         col1.insert(detail1)
         print("插入成功",detail1['ph_url'])
     except:
-        print("exit code 1")
-
+        pass
 
 
 def get_ph_url(response):
@@ -49,10 +48,10 @@ def get_ph_url(response):
         for div in divs:
             ph_url = pornhub_url + div
             ph_url = str(ph_url)
-            try:
-                url_save_mongo(ph_url)
-            except:
-                print("exit code 2")
+            # try:
+            #     url_save_mongo(ph_url)
+            # except:
+            #     print("exit code 2")
     except:
         print("exit code 3")
 
