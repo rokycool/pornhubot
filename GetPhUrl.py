@@ -54,7 +54,9 @@ def get_ph_url(response):
             except pymongo.errors.DuplicateKeyError:
                 print("重复的url")
             except Exception as e:
-                print(e)
+                print("exit code 1",e)
+            except:
+                print("exit code 2")
     except Exception as e:
         print(e)
 
@@ -62,13 +64,17 @@ def start_url(url):
     try:
         r = request.Request(url=url)
     except request.RequestException as e:
-        print("网页请求失败! 2")
+        print("exit 3")
+    except:
+        print("exit 4")
     response = request.urlopen(r)
     try:
         response = response.read().decode('utf-8')
         get_ph_url(response)
     except Exception as e:
-        print(e)
+        print("exit code 5",e)
+    except:
+        print("exit code 6")
 
 def parse_url__from_mongo():
     for i in pornhub_url:
