@@ -22,7 +22,7 @@ dbname="pornhub"
 db=clients[dbname]
 col1=db['detail']
 col2=db['downurl']
-col2.ensure_index('下载url', unique=True)
+col2.ensure_index('title', unique=True)
 num=0
 renum=0
 gonum=0
@@ -37,13 +37,13 @@ max_thread=2
 def Save_url_mongo(title,downurl):
     global renum
     global gonum
-    detail1 = {'时间':date,'标题': title, '下载URL':downurl}
+    detail1 = {'时间':date,'标题': title,'下载URL':downurl}
     try:
         gonum +=1
         print("正在插入:",gonum,"\ndownurl",downurl)
         col2.insert(detail1)
     except:
-        print("url插入重复:",renum,"\ndownurl:",downurl)
+        print("exit code:2 url插入重复:",renum,"\ndownurl:",downurl)
         renum += 1
 
 def callbackfunc(blocknum, blocksize, totalsize):
