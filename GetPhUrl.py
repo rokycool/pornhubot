@@ -46,13 +46,14 @@ def get_ph_url(response):
         selector = Selector(text=response)
         divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
         for div in divs:
-            ph_url = pornhub_url + div
+            url='https://jp.pornhub.com'
+            ph_url = url + div
             ph_url = str(ph_url)
             print(ph_url)
-            # try:
-            #     url_save_mongo(ph_url)
-            # except:
-            #     print("exit code 2")
+            try:
+                url_save_mongo(ph_url)
+            except:
+                print("exit code 2")
     except:
         print("exit code 3")
 
