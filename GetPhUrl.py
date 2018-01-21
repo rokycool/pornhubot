@@ -32,7 +32,7 @@ def url_save_mongo(ph_url):
     except Exception as e:
         print(e)
 def parse_url__from_mongo():
-    for item in db.col1.find():
+    for item in col1.detail1.find():
         print(item)
 
 
@@ -65,5 +65,5 @@ def start_url():
 
 
 if __name__=='__main__':
-    start_url()
-    # parse_url__from_mongo()
+    # start_url()
+    parse_url__from_mongo()
