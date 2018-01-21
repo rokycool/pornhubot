@@ -66,13 +66,12 @@ def start_url(url):
         print(e)
 
 def parse_url__from_mongo():
-    ret = col1.find('ph_url')
     for i in random(max_while):
-        if not ret or ret.count() == 0:
-            pornhub_url = 'https://jp.pornhub.com'
-            start_url(pornhub_url)
-        else:
-            for item in ret:
+        for item in col1.find('ph_url'):
+            if not item or item.count() == 0:
+                pornhub_url = 'https://jp.pornhub.com'
+                start_url(pornhub_url)
+            else:
                 start_url(item)
 if __name__=='__main__':
     # start_url()
