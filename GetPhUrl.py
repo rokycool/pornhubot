@@ -14,7 +14,7 @@ UA_LIST = [ "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/536.3 (KHTML, like 
 header={ 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8', 'Accept-Encoding': 'gzip, deflate, sdch', 'Accept-Language': 'zh-CN,zh;q=0.8,en;q=0.6', 'Connection': 'keep-alive','User-Agent': random.choice(UA_LIST) }
 clients=pymongo.MongoClient('106.15.224.237')
 date=time.strftime("%F", time.localtime())
-dbname="pornhub"+date
+dbname="pornhub"
 db=clients[dbname]
 col1=db['detail']
 col1.ensure_index('ph_url', unique=True)
@@ -31,6 +31,11 @@ def url_save_mongo(ph_url):
         print("插入成功",detail1['ph_url'])
     except Exception as e:
         print(e)
+def parse_url__from_mongo():
+    for item in db.col1.find():
+        print(item)
+
+
 def get_ph_url(response):
     #这一段经常出问题 尝试3次
     try:
@@ -61,3 +66,4 @@ def start_url():
 
 if __name__=='__main__':
     start_url()
+    # parse_url__from_mongo()
