@@ -27,7 +27,7 @@ num=0
 renum=0
 gonum=0
 #最大下载进程
-max_thread=1
+max_thread=2
 #待完善功能
 #1.更换header
 
@@ -76,7 +76,7 @@ def callbackfunc(blocknum, blocksize, totalsize):
 def down_file(downurl,title):
     title=title+'.mp4'
     filename=os.path.basename(title+".mp4")
-    print("开始下载文件",title,"url:",downurl)
+    print("开始下载文件",title)
     if downurl==None:
         print("exit code:3")
         exit()
@@ -105,13 +105,12 @@ def get_down_url(url):
     for i in range(1):
         downurl = rdownurl[i].split('"')[2]
         downurl = re.sub('\\\\','',downurl)
-    # print("title:",title,"downrul:",downurl,"url:",url)
     down_file(downurl,title)
 
 if __name__=='__main__':
-    url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
-    get_down_url(url)
+    # url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
+    # get_down_url(url)
     # Get_url_mongo()
     # 启动线程下载
-    # for i in range(max_thread):
-    #     threading.Thread(target=Get_url_mongo,args=('')).start()
+    for i in range(max_thread):
+        threading.Thread(target=Get_url_mongo,args=('')).start()
