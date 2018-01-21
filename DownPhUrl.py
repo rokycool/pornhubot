@@ -40,10 +40,10 @@ def Save_url_mongo(title,downurl):
     detail1 = {'时间':date,'标题': title, '下载URL':downurl}
     try:
         gonum +=1
-        print("正在插入:",gonum,downurl)
+        print("正在插入:",gonum,"downurl",downurl)
         col2.insert(detail1)
     except:
-        print("url插入重复:",renum,downurl)
+        print("url插入重复:",renum,"downurl:",downurl)
         renum += 1
 
 def callbackfunc(blocknum, blocksize, totalsize):
@@ -74,7 +74,10 @@ def down_file(downurl,title):
         print("exit code:3")
         exit()
     Save_url_mongo(title,downurl)
-    request.urlretrieve(downurl, filename, callbackfunc)
+    try:
+        request.urlretrieve(downurl, filename, callbackfunc)
+    except:
+        print("not download file:",title,"downurl:")
 
 
 
@@ -110,9 +113,9 @@ def Get_url_mongo():
 
 if __name__=='__main__':
     # url='https://jp.pornhub.com/view_video.php?viewkey=ph57670b8d90d20'
-    url='https://jp.pornhub.com/view_video.php?viewkey=ph57dfb291d5af9'
-    get_down_url(url)
-    # Get_url_mongo()
+    # url='https://jp.pornhub.com/view_video.php?viewkey=ph57dfb291d5af9'
+    # get_down_url(url)
+    Get_url_mongo()
     # 启动线程下载
     # for i in range(max_thread):
     #     threading.Thread(target=Get_url_mongo,args=('')).start()
