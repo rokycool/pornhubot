@@ -76,7 +76,7 @@ def callbackfunc(blocknum, blocksize, totalsize):
 
 def down_file(downurl,title):
     title=title+'.mp4'
-    filename=os.path.basename(title)
+    filename=os.path.basename('download/'+title)
     print("开始下载文件%s\n")%title
     Save_url_mongo(title,downurl)
     request.urlretrieve(downurl, filename, callbackfunc)
