@@ -5,6 +5,7 @@ from scrapy.selector import Selector
 from scrapy.http import HtmlResponse
 import pymongo
 import time
+import json
 import random
 
 url = 'https://jp.pornhub.com'
@@ -32,7 +33,9 @@ def url_save_mongo(ph_url):
     except Exception as e:
         print(e)
 def parse_url__from_mongo():
-    print(col1.find_one('ph_url'))
+    onedata=col1.find_one('ph_url')
+    onedata=json.load(onedata)
+    print(onedata)
     for item in col1.find('ph_url'):
         print(item)
 
