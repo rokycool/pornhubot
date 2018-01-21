@@ -46,8 +46,8 @@ def get_ph_url(response):
         selector = Selector(text=response)
         divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
         for div in divs:
-            url='https://jp.pornhub.com'
-            ph_url = url + div
+            _url='https://jp.pornhub.com'
+            ph_url = _url + div
             ph_url = str(ph_url)
             print(ph_url)
             try:
