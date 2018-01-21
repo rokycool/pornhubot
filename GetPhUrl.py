@@ -26,9 +26,8 @@ col1=db['detail']
 col1.ensure_index('ph_url', unique=True)
 #待完善功能
 #1.更换header
-#2.存取mongo数据
 #最大抓取深度
-max_while=6
+# max_while=6
 num=0
 renum=0
 gonum=0
