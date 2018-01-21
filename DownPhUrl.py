@@ -77,7 +77,7 @@ def down_file(downurl,title):
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
     except:
-        print("无法下载该文件:",title,"downurl:")
+        print("exit code: 5无法下载该文件:",title,"downurl:")
 
 
 
@@ -101,6 +101,7 @@ def get_down_url(url):
     for i in range(1):
         downurl = rdownurl[i].split('"')[2]
         downurl = re.sub('\\\\','',downurl)
+    print("get_down_url函数中 downurl:",downurl)
     down_file(downurl,title)
 
 def Get_url_mongo():
