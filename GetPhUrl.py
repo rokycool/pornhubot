@@ -36,8 +36,8 @@ def url_save_mongo(ph_url):
     try:
         col1.insert(detail1)
         print("插入成功",detail1['ph_url'])
-    except Exception as e:
-        print(e)
+    except:
+        print("exit code 1")
 
 
 
@@ -51,28 +51,20 @@ def get_ph_url(response):
             ph_url = str(ph_url)
             try:
                 url_save_mongo(ph_url)
-            except pymongo.errors.DuplicateKeyError:
-                print("重复的url")
-            except Exception as e:
-                print("exit code 1",e)
             except:
                 print("exit code 2")
-    except Exception as e:
-        print(e)
+    except:
+        print("exit code 3")
 
 def start_url(url):
     try:
         r = request.Request(url=url)
-    except request.RequestException as e:
-        print("exit 3")
     except:
         print("exit 4")
     response = request.urlopen(r)
     try:
         response = response.read().decode('utf-8')
         get_ph_url(response)
-    except Exception as e:
-        print("exit code 5",e)
     except:
         print("exit code 6")
 
