@@ -67,11 +67,12 @@ def start_url(url):
 def parse_url__from_mongo():
     for i in range(max_while):
         for item in col1.find('ph_url'):
-            if not item or item.count() == 0:
-                pornhub_url = 'https://jp.pornhub.com'
-                start_url(pornhub_url)
-            else:
-                start_url(item)
+            if item ==None:
+                print(item)
+                # pornhub_url = 'https://jp.pornhub.com'
+                # start_url(pornhub_url)
+            # else:
+            #     start_url(item)
 if __name__=='__main__':
     # start_url()
     parse_url__from_mongo()
