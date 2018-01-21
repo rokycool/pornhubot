@@ -44,11 +44,11 @@ def get_ph_url(response):
     #这一段经常出问题 尝试3次
     try:
         selector = Selector(text=response)
-        print(selector)
-        # divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
-        # for div in divs:
-        #     ph_url = pornhub_url + div
-        #     ph_url = str(ph_url)
+        divs = selector.xpath('//div[re:test(@class,"thumbnail-info-wrapper")]//@href').extract()
+        for div in divs:
+	        print(div)
+            # ph_url = pornhub_url + div
+            # ph_url = str(ph_url)
             # try:
             #     url_save_mongo(ph_url)
             # except:
