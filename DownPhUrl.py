@@ -40,10 +40,10 @@ def Save_url_mongo(title,downurl):
     detail1 = {'时间':date,'标题': title, '下载URL':downurl}
     try:
         gonum +=1
-        print("正在插入:",gonum,"downurl",downurl)
+        print("正在插入:",gonum,"\ndownurl",downurl)
         col2.insert(detail1)
     except:
-        print("url插入重复:",renum,"downurl:",downurl)
+        print("url插入重复:",renum,"\ndownurl:",downurl)
         renum += 1
 
 def callbackfunc(blocknum, blocksize, totalsize):
@@ -74,7 +74,7 @@ def down_file(downurl,title):
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
     except:
-        print("exit code: 5 无法下载该文件:",title,"downurl:")
+        print("exit code: 5 无法下载该文件:",title,"\ndownurl:")
 
 
 
