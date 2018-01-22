@@ -66,7 +66,7 @@ def get_down_url(url):
         rtitle = re.findall(r'<title>.*?</title>', response)
         rdownurl = re.findall(r'videoUrl.*?}', response)
         rviews = re.findall(r"<span class=\"count\">.*?</span> views</div>",response)
-        rperent=re.findall(r"<div class=\"votes-count-container\">.*?</div>")
+        rperent = re.findall(r"<div class=\"votes-count-container\">.*?</div>",response)
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         print("rviews:",rviews,"precent:",rperent)
         # rtitle = str(rtitle)
