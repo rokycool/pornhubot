@@ -78,7 +78,7 @@ def get_down_url(url):
     except IOError as e:
         print("exit code:2",e)
     except:
-        print("exit code:3 ")
+        pass
 
 
 def Get_url_mongo():
