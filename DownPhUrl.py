@@ -71,7 +71,12 @@ def callbackfunc(blocknum, blocksize, totalsize):
 def down_file(downurl,title):
     global sunum
     filename=os.path.basename(title+".mp4")
-    print("开始下载文件",title)
+    case=input("是否下载文件 y/n",title)
+    if case is 'n' or case is 'N':
+        print("跳过该文件")
+        return
+    elif case is 'Y' or case is 'y':
+        print("开始下载文件", title)
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
     except:
