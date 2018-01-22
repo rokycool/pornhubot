@@ -72,7 +72,7 @@ def get_down_url(url):
         views = re.sub('</span>','',views)
 
 
-        rperent = re.findall(r"votes-count-container.*?\%</span>",response)
+        rperent = re.findall(r"votes-count-container.*?",response)
 
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         print("rviews:",views,"precent:",rperent)
