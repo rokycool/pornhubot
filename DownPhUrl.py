@@ -70,10 +70,13 @@ def callbackfunc(blocknum, blocksize, totalsize):
 
 def down_file(downurl,title):
     global sunum
-    filename=os.path.basename(title+".mp4")
+    title=title+".mp4"
+    filename=os.path.basename(title)
     print("开始下载文件",title)
     try:
         request.urlretrieve(downurl, filename, callbackfunc)
+    except IOError as e:
+        print("exit code:7",e)
     except:
         print("exit code: 5 无法下载该文件:",title,"\ndownurl:")
     sunum +=1
