@@ -52,7 +52,6 @@ def Save_url_mongo(title,downurl,url):
 
 
 def get_down_url(url):
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
     try:
         r = request.Request(url)
     except request.RequestException as e:
