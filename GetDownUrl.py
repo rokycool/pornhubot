@@ -74,9 +74,9 @@ def get_down_url(url):
             downurl = rdownurl[i].split('"')[2]
             if downurl == None:
                 downurl = rdownurl[i+1].split('"')[2]
-            downurl = re.sub('\\\\', '', downurl)
-        # print("get_down_url函数中 downurl:",downurl)
-        Save_url_mongo(title, downurl,url)
+                downurl = re.sub('\\\\', '', downurl)
+                # print("get_down_url函数中 downurl:",downurl)
+                Save_url_mongo(title, downurl,url)
     except IOError as e:
         print("exit code:2",e)
     except:
