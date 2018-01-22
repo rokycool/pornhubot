@@ -65,7 +65,7 @@ def get_down_url(url):
         # print("response:",response)
         rtitle = re.findall(r'<title>.*?</title>', response)
         rdownurl = re.findall(r'videoUrl.*?}', response)
-        print("rdownurl:",rdownurl,"rtitle",rtitle)
+        # print("rdownurl:",rdownurl,"rtitle",rtitle)
         rtitle = str(rtitle)
         title = re.sub('<.*?title>', '', rtitle)
         title = re.sub('\[', '', title)
@@ -74,9 +74,9 @@ def get_down_url(url):
         downurl = rdownurl[0].split('"')[2]
         if downurl == None:
             downurl = rdownurl[1].split('"')[2]
-        # downurl = re.sub('\\\\', '', downurl)
+        downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
-        # Save_url_mongo(title, downurl,url)
+        Save_url_mongo(title, downurl,url)
     except IOError as e:
         print("exit code:2",e)
     except:
