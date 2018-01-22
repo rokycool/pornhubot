@@ -20,7 +20,6 @@ clients=pymongo.MongoClient('106.15.224.237')
 date=time.strftime("%F-%T", time.localtime())
 dbname="pornhub"
 db=clients[dbname]
-col1=db['detail']
 col2=db['viurl']
 col2.ensure_index('title', unique=True)
 num=0
