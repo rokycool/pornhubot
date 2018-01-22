@@ -76,8 +76,7 @@ def get_down_url(url):
         # print("get_down_url函数中 downurl:",downurl)
         Save_url_mongo(title, downurl,url)
     except:
-        print("downurl:",downurl,"title",title)
-        print("exit code:2")
+        print("exit code:2 ")
 
 
 def Get_url_mongo():
