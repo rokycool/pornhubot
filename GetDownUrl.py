@@ -70,11 +70,11 @@ def get_down_url(url):
         title = re.sub('<.*?title>', '', rtitle)
         title = re.sub('\[', '', title)
         title = re.sub(']', '', title)
-        # for i in range(1):
-        downurl = rdownurl[0].split('"')[2]
-        if downurl == None:
-            downurl = rdownurl[1].split('"')[2]
-        downurl = re.sub('\\\\', '', downurl)
+        for i in range(1):
+            downurl = rdownurl[i].split('"')[2]
+            if downurl == None:
+                downurl = rdownurl[i+1].split('"')[2]
+            downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
         Save_url_mongo(title, downurl,url)
     except IOError as e:
