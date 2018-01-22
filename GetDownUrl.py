@@ -70,7 +70,7 @@ def get_down_url(url):
         title = re.sub('<.*?title>', '', rtitle)
         title = re.sub('\[', '', title)
         title = re.sub(']', '', title)
-        for i in range(1):
+        for i in {0,1,2,3}:
             downurl = rdownurl[i].split('"')[2]
             if downurl == None:
                 downurl = rdownurl[i+1].split('"')[2]
