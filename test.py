@@ -69,14 +69,13 @@ def get_down_url(url):
         rperent=re.findall(r"<div class=\"votes-count-container\">.*?</div>")
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         print("rviews:",rviews,"precent:",rperent)
-        rtitle = str(rtitle)
-        title = re.sub('<.*?title>', '', rtitle)
-        title = re.sub('\[', '', title)
-        title = re.sub(']', '', title)
-        # for i in {}:
-        downurl = rdownurl[0].split('"')[2]
-        if downurl == '':
-            downurl = rdownurl[1].split('"')[2]
+        # rtitle = str(rtitle)
+        # title = re.sub('<.*?title>', '', rtitle)
+        # title = re.sub('\[', '', title)
+        # title = re.sub(']', '', title)
+        # downurl = rdownurl[0].split('"')[2]
+        # if downurl == '':
+        #     downurl = rdownurl[1].split('"')[2]
         downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl,"rviews",rviews)
         # Save_url_mongo(title, downurl,url)
