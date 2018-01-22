@@ -59,8 +59,8 @@ def get_down_url(url):
         r = request.Request(url)
     except request.RequestException as e:
         print("网页失败请求！1")
-    response=request.urlopen(r)
     try:
+        response = request.urlopen(r)
         response=response.read().decode('utf-8')
         # print("response:",response)
         rtitle = re.findall(r'<title>.*?</title>', response)
