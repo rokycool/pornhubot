@@ -71,7 +71,7 @@ def callbackfunc(blocknum, blocksize, totalsize):
 def down_file(downurl,title):
     global sunum
     filename=os.path.basename(title+".mp4")
-    case=input("是否下载文件 y/n",title)
+    case=input("是否下载文件%s y/n")%title
     if case is 'n' or case is 'N':
         print("跳过该文件")
         return
