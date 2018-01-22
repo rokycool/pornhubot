@@ -45,8 +45,8 @@ def Save_url_mongo(title,downurl):
         print("正在插入:",gonum,"\ndownurl",downurl)
         col2.insert(detail1)
     except:
-        print("exit code:2 url插入重复:",renum,"\ndownurl:",downurl)
         renum += 1
+        print("exit code:2 url插入重复:",renum,"\ndownurl:",downurl)
 
 def callbackfunc(blocknum, blocksize, totalsize):
     '''回调函数
@@ -106,6 +106,7 @@ def get_down_url(url):
         # print("get_down_url函数中 downurl:",downurl)
         down_file(downurl, title)
     except:
+        print("downurl:",downurl,"title",title)
         print("exit code:4")
 
 
