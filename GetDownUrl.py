@@ -41,9 +41,12 @@ def Save_url_mongo(title,downurl,url):
     global gonum
     detail1 = {'时间':date,'标题': title,'下载URL':downurl,'ph_url':url}
     try:
+        global sunum
         gonum +=1
+        sunum +=1
         print("正在插入:",gonum,"downurl",downurl)
         col2.insert(detail1)
+        print("插入成功:",sunum,"downurl",downurl)
     except:
         renum += 1
         print("exit code:1 url插入重复:",renum)
