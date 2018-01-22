@@ -72,7 +72,7 @@ def get_down_url(url):
         views = re.sub('</span>','',views)
 
 
-        rperent = re.findall(r"votes-count-container.*?</span>",response)
+        rperent = re.findall(r"votes-count-container.*?%</span>",response)
 
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         print("rviews:",views,"precent:",rperent)
@@ -83,7 +83,7 @@ def get_down_url(url):
         # downurl = rdownurl[0].split('"')[2]
         # if downurl == '':
         #     downurl = rdownurl[1].split('"')[2]
-        downurl = re.sub('\\\\', '', downurl)
+        # downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl,"rviews",rviews)
         # Save_url_mongo(title, downurl,url)
     except IOError as e:
