@@ -36,52 +36,19 @@ max_thread=2
 
 
 
-def Save_url_mongo(title,downurl):
+def Save_url_mongo(title,downurl,url):
     global renum
     global gonum
-    detail1 = {'时间':date,'标题': title,'下载URL':downurl}
+    detail1 = {'时间':date,'标题': title,'下载URL':downurl,'ph_url':url}
     try:
         gonum +=1
         print("正在插入:",gonum,"\ndownurl",downurl)
         col2.insert(detail1)
     except:
         renum += 1
-        print("exit code:2 url插入重复:",renum,"\ndownurl:",downurl)
-
-def callbackfunc(blocknum, blocksize, totalsize):
-    '''回调函数
-    @blocknum: 已经下载的数据块
-    @blocksize: 数据块的大小
-    @totalsize: 远程文件的大小
-    '''
-    global url
-    percent = 100.0 * blocknum * blocksize / totalsize
-    if percent > 100:
-        percent = 100
-    downsize=blocknum * blocksize
-    if downsize >= totalsize:
-       downsize=totalsize
-    s ="%.2f%%"%(percent)+"====>"+"%.2f"%(downsize/1024/1024)+"M/"+"%.2f"%(totalsize/1024/1024)+"M \r"
-    sys.stdout.write(s)
-    sys.stdout.flush()
-    if percent == 100:
-        print('')
+        print("exit code:1 url插入重复:",renum,"\ndownurl:",downurl)
 
 
-def down_file(downurl,title):
-    global sunum
-    title=title+".mp4"
-    filename=os.path.basename(title)
-    print("开始下载文件",title)
-    try:
-        request.urlretrieve(downurl, filename, callbackfunc)
-    except IOError as e:
-        print("exit code:7",e)
-    except:
-        print("exit code: 5 无法下载该文件:",title,"\ndownurl:")
-    sunum +=1
-    print("下载成功 开始记录到数据库",sunum)
-    Save_url_mongo(title,downurl)
 
 
 def get_down_url(url):
@@ -107,10 +74,10 @@ def get_down_url(url):
             downurl = rdownurl[2].split('"')[2]
         downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
-        down_file(downurl, title)
+        Save_url_mongo(title, downurl,url)
     except:
         print("downurl:",downurl,"title",title)
-        print("exit code:4")
+        print("exit code:2")
 
 
 def Get_url_mongo():
@@ -123,5 +90,3 @@ def Get_url_mongo():
 
 if __name__=='__main__':
     Get_url_mongo()
-    # 启动线程下载
-    # threading.Thread(target=Get_url_mongo,args=('')).start()
