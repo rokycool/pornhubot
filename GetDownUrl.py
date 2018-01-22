@@ -86,7 +86,10 @@ def Get_url_mongo():
     for item in col1.find():
         num +=1
         print("open url :",num,item['ph_url'])
-        get_down_url(item['ph_url'])
+        if 'playlist' in item['ph_url'] or 'users' in item['ph_url']:
+            pass
+        else:
+            get_down_url(item['ph_url'])
 
 
 if __name__=='__main__':
