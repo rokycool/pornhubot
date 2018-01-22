@@ -75,8 +75,10 @@ def get_down_url(url):
         downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
         Save_url_mongo(title, downurl,url)
+    except IOError as e:
+        print("exit code:2",e)
     except:
-        print("exit code:2 ")
+        print("exit code:3 ")
 
 
 def Get_url_mongo():
