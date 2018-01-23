@@ -60,6 +60,11 @@ def get_down_url(url):
     except request.RequestException as e:
         print("网页失败请求！1")
     try:
+        # def del_span(value):
+        #     r = str(value)
+        #     title = re.sub('<.*?title>', '', rtitle)
+        #     title = re.sub('\[', '', title)
+        #     title = re.sub(']', '', title)
         response = request.urlopen(r)
         response=response.read().decode('utf-8')
         # print("response:",response)
@@ -70,31 +75,31 @@ def get_down_url(url):
         rpercent = re.findall(r"<span class=\"percent\">.*?</span>",response)
         rvotesUp = re.findall(r"<span class=\"votesUp\">.*?</span>",response)
         rvotesDown = re.findall(r"<span class=\"votesDown\">.*?</span>",response)
-        views = str(rviews)
-        views = re.sub('<span class=\"count\">','',views)
+        rviews = str(rviews)
+        views = re.sub('<span class=\"count\">','',rviews)
         views = re.sub('</span>','',views)
-        percent = str(rpercent)
-        percent = re.sub('<span class="percent">','',percent)
+        rpercent = str(rpercent)
+        percent = re.sub('<span class="percent">','',rpercent)
         percent = re.sub('</span>','',percent)
         percent = re.sub('</span>','',percent)
-        votesUp = str(rvotesUp)
-        votesUp = re.sub('<span class="votesUp">','',votesUp)
+        rvotesUp = str(rvotesUp)
+        votesUp = re.sub('<span class="votesUp">','',rvotesUp)
         votesUp = re.sub('</span>','',votesUp)
-        votesDown = str(rvotesDown)
-        votesDown = re.sub('<span class="votesDown">','',votesDown)
+        rvotesDown = str(rvotesDown)
+        votesDown = re.sub('<span class="votesDown">','',rvotesDown)
         votesDown = re.sub('</span>','',votesDown)
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         rtitle = str(rtitle)
         title = re.sub('<.*?title>', '', rtitle)
         title = re.sub('\[', '', title)
         title = re.sub(']', '', title)
-        # for i in {}:
         downurl = rdownurl[0].split('"')[2]
         if downurl == '':
             downurl = rdownurl[1].split('"')[2]
         downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
-        Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
+        print(title, downurl, url,"percent", percent,"votesUp:",votesUp,"votesDown:", votesDown,"views:", views)
+        # Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
     except IOError as e:
         print("exit code:2",e)
     except:
