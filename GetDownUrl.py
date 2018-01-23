@@ -35,7 +35,7 @@ max_thread=2
 
 def int_value(value):
 	if "%" in value:
-		newint = float(value.strip("%")) / 100
+		newint = float(value.strip("%"))
 		return newint
 	elif isinstance(value, float):
 		print(value)
@@ -72,6 +72,7 @@ def get_down_url(url):
             value = str(value)
             value = re.sub('\[', '', value)
             value = re.sub(']', '', value)
+            value = re.sub('\'', '', value)
             return value
         response = request.urlopen(r)
         response=response.read().decode('utf-8')
