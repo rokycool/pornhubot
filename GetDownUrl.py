@@ -36,10 +36,10 @@ max_thread=2
 
 
 
-def Save_url_mongo(title,downurl,url):
+def Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views):
     global renum
     global gonum
-    detail1 = {'时间':date,'标题': title,'下载URL':downurl,'ph_url':url}
+    detail1 = {'时间':date,'标题': title,'下载URL': downurl,'ph_url': url,'percent':percent,'votesUp': votesUp,'votesDown':votesDown,}
     try:
         global sunum
         gonum +=1
@@ -66,6 +66,25 @@ def get_down_url(url):
         rtitle = re.findall(r'<title>.*?</title>', response)
         rdownurl = re.findall(r'videoUrl.*?}', response)
         rviews = re.findall(r"<span class=\"count\">.*?</span> views</div>",response)
+        rviews = re.findall(r"<span class=\"count\">.*?</span>",response)
+        rpercent = re.findall(r"<span class=\"percent\">.*?</span>",response)
+        rvotesUp = re.findall(r"<span class=\"votesUp\">.*?</span>",response)
+        rvotesDown = re.findall(r"<span class=\"votesDown\">.*?</span>",response)
+        views = str(rviews)
+        views = re.sub('<span class=\"count\">','',views)
+        views = re.sub('</span>','',views)
+        percent = str(rpercent)
+        percent = re.sub('<span class="percent">','',percent)
+        percent = re.sub('</span>','',percent)
+        percent = re.sub('</span>','',percent)
+        votesUp = str(rvotesUp)
+        votesUp = re.sub('<span class="votesUp">','',votesUp)
+        votesUp = re.sub('</span>','',votesUp)
+        votesDown = str(rvotesDown)
+        votesDown = re.sub('<span class="votesDown">','',votesDown)
+        votesDown = re.sub('</span>','',votesDown)
+
+
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         rtitle = str(rtitle)
         title = re.sub('<.*?title>', '', rtitle)
@@ -77,7 +96,7 @@ def get_down_url(url):
             downurl = rdownurl[1].split('"')[2]
         downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
-        Save_url_mongo(title, downurl,url)
+        Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
     except IOError as e:
         print("exit code:2",e)
     except:
