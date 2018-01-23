@@ -119,8 +119,8 @@ def get_down_url(url):
         # Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
     except IOError as e:
         print("exit code:2",e)
-    # except:
-    #     pass
+    except:
+        pass
 
 
 def Get_url_mongo():
