@@ -74,13 +74,14 @@ def get_down_url(url):
         views = re.sub('<span class=\"count\">','',views)
         views = re.sub('</span>','',views)
         percent = str(rperent)
-        percent = re.sub('<span class=\"percent\">','',percent)
+        percent = re.sub('<span class="percent">','',percent)
+        percent = re.sub('</span>','',percent)
         percent = re.sub('</span>','',percent)
         votesUp = str(rvotesUp)
-        votesUp = re.sub('<span class=\"otesUp\">','',votesUp)
+        votesUp = re.sub('<span class="votesUp">','',votesUp)
         votesUp = re.sub('</span>','',votesUp)
         votesDown = str(rvotesDown)
-        votesDown = re.sub('<span class=\"otesDown\">','',votesDown)
+        votesDown = re.sub('<span class="votesDown">','',votesDown)
         votesDown = re.sub('</span>','',votesDown)
 
 
