@@ -33,6 +33,14 @@ max_thread=2
 #待完善功能
 #1.更换header
 
+def int_value(value):
+	if "%" in value:
+		newint = float(value.strip("%")) / 100
+		return newint
+	elif isinstance(value, float):
+		print(value)
+	else:
+		print("数值错误")
 
 
 
@@ -60,11 +68,11 @@ def get_down_url(url):
     except request.RequestException as e:
         print("网页失败请求！1")
     try:
-        # def del_span(value):
-        #     r = str(value)
-        #     title = re.sub('<.*?title>', '', rtitle)
-        #     title = re.sub('\[', '', title)
-        #     title = re.sub(']', '', title)
+        def del_span(value):
+            value = str(value)
+            value = re.sub('\[', '', value)
+            value = re.sub(']', '', value)
+            return value
         response = request.urlopen(r)
         response=response.read().decode('utf-8')
         # print("response:",response)
@@ -98,6 +106,11 @@ def get_down_url(url):
             downurl = rdownurl[1].split('"')[2]
         downurl = re.sub('\\\\', '', downurl)
         # print("get_down_url函数中 downurl:",downurl)
+        percent=del_span(percent)
+        percent=int_value(percent)
+        votesDown=del_span(votesDown)
+        votesUp=del_span(votesUp)
+        views=del_span(views)
         print(title, downurl, url,"percent", percent,"votesUp:",votesUp,"votesDown:", votesDown,"views:", views)
         # Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
     except IOError as e:
