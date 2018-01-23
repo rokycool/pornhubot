@@ -67,15 +67,29 @@ def get_down_url(url):
         rdownurl = re.findall(r'videoUrl.*?}', response)
         rviews = re.findall(r"<span class=\"count\">.*?</span> views</div>",response)
         rviews = re.findall(r"<span class=\"count\">.*?</span>",response)
+        rperent = re.findall(r"<span class=\"percent\">.*?</span>",response)
+        rvotesUp = re.findall(r"<span class=\"votesUp\">.*?</span>",response)
+        rvotesDown = re.findall(r"<span class=\"votesDown\">.*?</span>",response)
         views = str(rviews)
         views = re.sub('<span class=\"count\">','',views)
         views = re.sub('</span>','',views)
+        percent = str(rperent)
+        percent = re.sub('<span class=\"percent\">','',percent)
+        percent = re.sub('</span>','',percent)
+        votesUp = str(rvotesUp)
+        votesUp = re.sub('<span class=\"otesUp\">','',votesUp)
+        votesUp = re.sub('</span>','',votesUp)
+        votesDown = str(rvotesDown)
+        votesDown = re.sub('<span class=\"otesDown\">','',votesDown)
+        votesDown = re.sub('</span>','',votesDown)
 
 
-        rperent = re.findall(r"c<span class=\"percent\">.*?</span>",response)
+
+
+
 
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
-        print("rviews:",views,"precent:",rperent)
+        print("views:",views,"precent:",rperent,'votesUp:',votesUp,'votesDown:',votesDown)
         # rtitle = str(rtitle)
         # title = re.sub('<.*?title>', '', rtitle)
         # title = re.sub('\[', '', title)
