@@ -8,6 +8,7 @@ import time
 import json
 
 pornhub_url={'https://jp.pornhub.com',
+             'https://jp.pornhub.com/pornstar/faye-reagan',
              'https://jp.pornhub.com/view_video.php?viewkey=ph5a25fd66527ff',
              'https://jp.pornhub.com/view_video.php?viewkey=ph58abec05472e7',
              'https://www.pornhub.com/view_video.php?viewkey=ph59d6581c0c3e5',
