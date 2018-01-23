@@ -115,8 +115,9 @@ def get_down_url(url):
         votesUp=int(votesUp)
         views=del_span(views)
         views=int(re.sub(',','',views))
-        print(title, downurl, url,"percent", percent,"votesUp:",votesUp,"votesDown:", votesDown,"views:", views)
-        # Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
+        print("\n", "percent", percent,"votesUp:",votesUp,"votesDown:", votesDown,"views:", views)
+        # print("\n",title, downurl, url,"percent", percent,"votesUp:",votesUp,"votesDown:", votesDown,"views:", views)
+        Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
     except IOError as e:
         print("exit code:2",e)
     except:
