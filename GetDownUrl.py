@@ -35,9 +35,9 @@ max_thread=2
 
 def int_value(value):
 	if "%" in value:
-		newint = float(value.strip("%"))
+		newint = int(value.strip("%")) /100
 		return newint
-	elif isinstance(value, float):
+	elif isinstance(value.strip(","), int):
 		print(value)
 	else:
 		print("数值错误")
@@ -110,8 +110,11 @@ def get_down_url(url):
         percent=del_span(percent)
         percent=int_value(percent)
         votesDown=del_span(votesDown)
+        votesDown=int_value(votesDown)
         votesUp=del_span(votesUp)
+        votesUp=int_value(votesUp)
         views=del_span(views)
+        views=int_value(views)
         print(title, downurl, url,"percent", percent,"votesUp:",votesUp,"votesDown:", votesDown,"views:", views)
         # Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views)
     except IOError as e:
