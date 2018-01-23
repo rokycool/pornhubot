@@ -83,8 +83,6 @@ def get_down_url(url):
         votesDown = str(rvotesDown)
         votesDown = re.sub('<span class="votesDown">','',votesDown)
         votesDown = re.sub('</span>','',votesDown)
-
-
         # print("rdownurl:",rdownurl,"rtitle",rtitle)
         rtitle = str(rtitle)
         title = re.sub('<.*?title>', '', rtitle)
