@@ -81,7 +81,7 @@ def parse_url__from_mongo():
     for i in pornhub_url:
         url_save_mongo(i)
     while (True):
-        for item in col1.find():
+        for item in col1.find(no_cursor_timeout=True):
             num +=1
             print("正在解析:",num,item['ph_url'])
             start_url(item['ph_url'])

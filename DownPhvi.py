@@ -76,7 +76,7 @@ def down_file(downurl,title):
 
 def Get_url_mongo():
     global num
-    for item in col2.find():
+    for item in col2.find(no_cursor_timeout=True):
         num +=1
         print("open url :",num,item['ph_url'])
         down_file(item['ph_url'],item['title'])
