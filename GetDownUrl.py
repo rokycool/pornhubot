@@ -126,7 +126,7 @@ def get_down_url(url):
 
 def Get_url_mongo():
     global num
-    for item in col1.find(no_cursor_timeout=True):
+    for item in col1.find(no_cursor_timeout=True).batch_size(5):
         num +=1
         print("open url :",num,item['ph_url'])
         if 'playlist' in item['ph_url'] or 'users' in item['ph_url']:
