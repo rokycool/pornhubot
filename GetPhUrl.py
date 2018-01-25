@@ -7,6 +7,7 @@ import pymongo
 import time
 import json
 import phmongo
+date=time.strftime("%F-%T", time.localtime())
 pornhub_url={'https://jp.pornhub.com',
              'https://jp.pornhub.com/pornstar/faye-reagan',
              'https://jp.pornhub.com/view_video.php?viewkey=ph5a25fd66527ff',
@@ -35,7 +36,7 @@ def url_save_mongo(ph_url):
     detail1={'时间':date,'ph_url':ph_url}
     print("正在插入",detail1['ph_url'])
     try:
-        col1.insert(detail1)
+        phmongo.col1.insert(detail1)
         print("插入成功",gonum,detail1['ph_url'])
         gonum += 1
     except:

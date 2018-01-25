@@ -12,6 +12,7 @@ import time
 import random
 import requests
 import phmongo
+date=time.strftime("%F-%T", time.localtime())
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -48,7 +49,7 @@ def Save_url_mongo(title, downurl, url, percent,votesUp, votesDown, views):
         gonum +=1
         sunum +=1
         print("正在插入:",gonum,"downurl",downurl)
-        col2.insert(detail1)
+        phmongo.col2.insert(detail1)
         print("插入成功:",sunum,"downurl",downurl)
     except:
         renum += 1

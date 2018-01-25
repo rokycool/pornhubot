@@ -12,6 +12,8 @@ import time
 import random
 import requests
 import phmongo
+date=time.strftime("%F-%T", time.localtime())
+
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
