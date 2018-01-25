@@ -40,3 +40,6 @@ GetDownUrl.py
 DownPhvi.py
 
     拉取mogno中视频地址，并下载mp4文件
+phmongo.py
+
+    mongo的配置文件
